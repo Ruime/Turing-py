@@ -61,15 +61,14 @@
 # 3. anaconda基本使用
 - anaconda主要是一个虚拟环境管理器
 - 还是一个安装包管理器
-- conda list : 显示anaconda的安装包
-- conda env list：显示anaconda的虚拟环境
-    - conda常用命令：
+- conda常用命令：
     - conda deactivate(退出当前环境)
     - conda remove -n name(删除名为name的环境)
     - conda create -n OOP python3.6(创建py版本为3.6,名为OOP的环境)
     - source activate OOP(激活名为OOP的环境)
     - conda activate OOP(进入OOP虚拟环境)
-
+    - conda list : 显示anaconda的安装包
+    - conda env list：显示anaconda的虚拟环境
 
 
 
