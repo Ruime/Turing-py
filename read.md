@@ -69,6 +69,7 @@
     - conda activate OOP(进入OOP虚拟环境)
     - conda list : 显示anaconda的安装包
     - conda env list：显示anaconda的虚拟环境
+    -
 
 
 
