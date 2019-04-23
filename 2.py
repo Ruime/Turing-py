@@ -121,8 +121,8 @@ class Dog(PaxingAni):
 # 实例化的时候自动调用了Dog的构造函数
 benben = Dog()
 
-'''
 
+# 继承中的构造函数 - 2
 class Animel():
     def __init__(self):
         print("Animel")
@@ -153,3 +153,79 @@ class Cat(PaxingAni):
 # 此时应该自动调用构造函数，因为Cat没有构造函数，所以查找父类的构造函数
 # 在PaxingAin中查找了构造函数，则停止向上查找
 c = Cat()
+
+
+# 继承中的构造函数 - 3
+class Animel():
+    def __init__(self):
+        print("Animel")
+
+
+class PaxingAni(Animel):
+    def __init__(self, name):
+        print("paxing dongwu {0}".format(name))
+
+
+class Dog(PaxingAni):
+    # __init__就是构造函数
+    # 每次实例化的时候第一个被调用
+    # 因为主要工作是进行初始化，所以得名构造函数(构造函数的第一个参数一定是self)
+    def __init__(self):
+        print("I am init in dog")
+
+d = Dog()
+
+
+class Cat(PaxingAni):
+    pass
+# 此时，由于Cat没有构造函数，则向上查找
+# 因为PaxingAni的构造函数需要两个参数，实例化的时候给了一个，报错
+c = Cat()
+
+
+# 继承中的构造函数 - 4
+class Animel():
+    def __init__(self):
+        print("Animel")
+
+
+class PaxingAni(Animel):
+    pass
+
+
+class Dog(PaxingAni):
+    pass
+
+d = Dog()
+
+
+class Cat(PaxingAni):
+    pass
+# 此时，由于Cat没有构造函数，则向上查找
+# 因为PaxingAni的构造函数需要两个参数，实例化的时候给了一个，报错
+c = Cat()
+# 结果：
+# Animel
+# Animel
+'''
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
