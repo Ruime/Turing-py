@@ -135,7 +135,7 @@ class C(B):
 # 此时，会出现参数结构不对应错误，一定要与构造函数的参数相对应
 c = C()
 
-'''
+
 
 
 # 构造函数的调用顺序 -3
@@ -156,14 +156,14 @@ class C(B):
     # 即调用B的构造函数在后面添加一些功能
     # 有两种方法实现：
 
-    '''
+    ''''''
     # 第一种是通过父类名调用
     def __init__(self, name):
         # 首先调用父类构造函数
         B.__init__(self, name)
         # 其次，再增加自己的功能
         print("这是C中附加的功能")
-    '''
+    ''''''
     # 第二种，使用super调用
     def __init__(self, name):
         # 首先调用父类构造函数
@@ -176,7 +176,41 @@ class C(B):
 c = C("我C")
 
 
+# issubclass()
+class A():
+    pass
+class B():
+    pass
+class C(A):
+    pass
 
 
+print(issubclass(B, A))
+print(issubclass(C, A))
+print(issubclass(B, object))
+
+# isinstance()
+class A():
+    pass
+a = A
+print(isinstance(a, A))
 
 
+# hasattr()
+class A():
+    name = "no name"
+
+a = A()
+print(hasattr(a, "name"))
+print(hasattr(a, "age"))
+
+# halp 案例
+
+help(setattr)
+'''
+
+# dir案例
+class A():
+    pass
+
+print(dir(A))
