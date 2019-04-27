@@ -294,18 +294,22 @@ def talk(self):
 
 '''
 
+
 # 用type来创建一个类
 def say(self):
     print("Saying......")
 
+
 def talk(self):
     print("Talking......")
 
-A = type("Aname", (object, ), {"class_say":say, "class_talk":talk})
+
+A = type("Aname", (object,), {"class_say": say, "class_talk": talk})
 
 # 然后可以想正常访问一样使用类
 a = A()
 dir(a)
+
 
 # 元类演示
 # 元类写法是固定的，他必须继承自type
@@ -319,6 +323,7 @@ class TulingMetaClass(type):
         attrs['addr'] = "北京市海淀区公主坟西翠路12号"
         return type.__new__(cls, name, bases, attrs)
 
+
 # 元类定义完就可以用，使用注意写法
 
 
@@ -328,4 +333,4 @@ class Teacher(object, metaclass=TulingMetaClass):
 
 t = Teacher()
 
-t.id
+# t.id

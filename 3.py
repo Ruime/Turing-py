@@ -1,4 +1,4 @@
-'''
+
 class A():
     pass
 
@@ -207,7 +207,6 @@ print(hasattr(a, "age"))
 # halp 案例
 
 help(setattr)
-'''
 
 # dir案例
 class A():
