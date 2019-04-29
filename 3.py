@@ -60,6 +60,9 @@ s.fly()
 s.swim()
 
 
+'''
+
+
 # 菱形继承问题
 class A():
     pass
@@ -75,108 +78,3 @@ class C(A):
 
 class D(B, C):
     pass
-
-
-# 构造函数例子(魔法函数)
-class Person():
-    # 对Person类进行实例化的时候
-    # 姓名要确定
-    # 年龄要确定
-    # 地址要确定
-    pass
-
-    def __init__(self):
-        self.name = "no name"
-        self.age = 18
-        self.address = "宿舍"
-        print("In init func")
-
-# 实例化一个人
-p =Person()
-
-
-# 构造函数的调用顺序 -1
-# 如果子类没有写构造函数，则自动向上查找，直到找到位置
-class A():
-    pass
-
-class B(A):
-    def __init__(self):
-        print("B")
-
-
-class C(B):
-    pass
-
-# 此时，首先查找C的构造函数
-# 如果没有，则向上按照MRO顺序查找父类的构造函数，直到找到为止
-
-c = C()
-
-
-# 构造函数的调用顺序 -2
-# 如果子类没有写构造函数，则自动向上查找，直到找到位置
-class A():
-    def __init__(self):
-        print("A")
-
-
-class B(A):
-    def __init__(self, name):
-        print("B")
-        print(name)
-
-
-class C(B):
-    pass
-
-# 此时，首先查找C的构造函数
-# 如果没有，则向上按照MRO顺序查找父类的构造函数，直到找到为止
-# 此时，会出现参数结构不对应错误，一定要与构造函数的参数相对应
-c = C()
-
-'''
-
-
-# 构造函数的调用顺序 -3
-# 如果子类没有写构造函数，则自动向上查找，直到找到位置
-class A():
-    def __init__(self):
-        print("A")
-
-
-class B(A):
-    def __init__(self, name):
-        print("B")
-        print(name)
-
-
-class C(B):
-    # c中想扩展B的构造函数
-    # 即调用B的构造函数在后面添加一些功能
-    # 有两种方法实现：
-
-    '''
-    # 第一种是通过父类名调用
-    def __init__(self, name):
-        # 首先调用父类构造函数
-        B.__init__(self, name)
-        # 其次，再增加自己的功能
-        print("这是C中附加的功能")
-    '''
-    # 第二种，使用super调用
-    def __init__(self, name):
-        # 首先调用父类构造函数
-        super(C, self).__init__(name)
-        # 其次，再增加自己的功能
-        print("这是C中附加的功能")
-# 此时，首先查找C的构造函数
-# 如果没有，则向上按照MRO顺序查找父类的构造函数，直到找到为止
-# 此时，会出现参数结构不对应错误，一定要与构造函数的参数相对应
-c = C("我C")
-
-
-
-
-
-
