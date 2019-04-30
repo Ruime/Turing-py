@@ -5,7 +5,7 @@
 - 在python中，异常是一个类可以处理和使用
 
         
-        # 异常的分类
+        # 异常的分类:
         AssertError 断言语句(assert)失败
         AttributeError 尝试访问未知的对象属性
         EOFError 用户输入文件末尾标志EOF (Ctrl+d)

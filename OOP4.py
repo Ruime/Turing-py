@@ -63,6 +63,7 @@ class A():
 
 a = A()
 
+
 # __call__举例
 class A():
     def __init__(self, name = 0):

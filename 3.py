@@ -71,7 +71,6 @@ class A():
 class B(A):
     pass
 
-
 class C(A):
     pass
 
