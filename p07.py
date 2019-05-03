@@ -2,7 +2,11 @@ import calendar
 import time
 import timeit
 import datetime
-from datetime import datetime, timedelta
+from datetime import datetime,  timedelta
+import os
+import os.path as op
+import zipfile
+import random
 '''
 # 获取一年日历的字符串
 # 参数
@@ -168,15 +172,216 @@ s = '''
 def doIt(num):
     for i in range(num):
         print("Repeat for {0}".format(i))
-'''
+
 # 执行doIt(num)
 # setup负责把环境变量准备好
 # 实际上相当于给timeit创造了一个小环境
 # 再创作的小环境中代码执行的顺序是:
-'''
+''''''
 def doIt(num):
     .....
 num = 3
 doIt(num)
-'''
+''''''
 t = timeit.timeit("doIt(num)", setup=s+"num=3", number=10)
+
+
+# getcwd() 获取当前工作目录
+# 格式： os.getcwd()
+# 返回值：当前工作目录的字符串
+
+mydir = os.getcwd()
+print(mydir)
+
+# chdir() 改变当前的工作目录
+# change directory
+# 格式：os.chdir(路径)
+# 返回值：无
+
+os.chdir("D:/learn/python/tuling")
+mydir = os.getcwd()
+print(mydir)
+
+# listdir()获取一个目录中所有子目录和文件的名称列表
+# 格式：os.listdir(路径)
+# 返回值：所有子目录和文件名称的列表
+
+lis = os.listdir("D:/learn/python/tuling")
+print(lis)
+
+# makedirs()递归创建文件夹
+# 格式：os.makedirs(递归路径)
+# 返回值：无
+# 递归路径：多个文件夹层层包含的路径就是递归的路径，例如 a/b/c
+
+rst = os.makedirs("rui")
+print(rst)
+
+# system()运行shell命令
+# 格式：os.system(系统命令)
+# 返回值：打开一个shell或者终端界面
+# 一般使用subprocess代替
+
+# ls是列出当前文件和文件夹的系统命令
+# rst = os.system("ls")
+# print(rst)
+# 在当前目录下创建一个rui,haha 的文件集
+rst = os.system("touch rui.haha")
+print(rst)
+
+# getenv() 获取指定的系统环境变量值
+# 相应的还有putenv
+# 格式：os.getenv("环境变量名")
+# 返回值：指定环境变量名对应的值
+rst = os.getenv("path")
+print(rst)
+
+# exit() 退出当前程序
+# 格式：exit()
+# 返回值：无
+
+print(os.pardir)
+print(os.curdir)
+print(os.sep)
+print(os.name)
+
+# abspath() 将路径转换为绝对路径
+# 格式：os.path.abspath(”路径“)
+# 返回值: 路径的绝对路径形式
+
+# linux中
+# . 号代表当前目录
+# .. 代表父目录
+absp = op.abspath(".")
+print(absp)
+
+# basename() 获取路径中的中文名部分
+# 格式：os.parh.basename("路径")
+# 返回值：文件名字符串
+
+bn = op.basename("D:/learn/python")
+print(bn)
+bn = op.basename("D:/learn/python/tuling")
+print(bn)
+
+# join() 将多个路径拼合成一个路径
+# 格式： os.path.join(路径1， 路径2......)
+# 返回值： 组合之后的新路径字符串
+bd = "D:/learn/python/tuling"
+fn = "rui"
+p = op.join(bd, fn)
+print(p)
+
+# split() 将路径切割为文件夹部分和当前文件部分
+# 格式：os.path.split(路径)
+# 返回值：路径和文件名组成的元组
+
+t = op.split("D:/learn/python/tuling/2")
+print(t)
+
+d,p = op.split("D:/learn/python/tuling/2")
+print(d,p)
+
+# isdir() 检测是否是目录
+# 格式： os.path.isdir(路径)
+# 返回值：布尔值
+rst = os.path.isdir("D:/learn/python/tuling/2")
+print(rst)
+rst = os.path.isdir("D:/learn/python/tuling")
+print(rst)
+
+# exists()检测文件或目录是否存在
+# 格式：os.path.exists(路径)
+# 返回值：布尔值
+
+e = op.exists("D:/learn/python")
+print(e)
+e = op.exists("D:/learn/python/tuling/2.py")
+print(e)
+e = op.exists("D:/learn/pyhon")
+print(e)
+
+# shutil 模块
+# copy() 复制文件
+# 格式：shutil.copy(来源路径, 目标路径)
+# 返回值：返回目标路径
+# 拷贝的同时，可以给文件重命名
+
+rst = shutil.copy("D:/learn/python/tuling/2.py", "D:/learn/python/2copy.py")
+print(rst)
+
+# copy2() 复制文件，保留元数据(文件信息)
+# 格式：shutil.copy2(来源路径, 目标路径)
+# 返回值：返回目标路径
+# copy2和copy的区别在于copy2复制文件时尽量保留元数据
+
+# copyfile() 将一个文件中的内容复制到另一个文件当中
+# 格式：shutil.copyfile("来源路径", "目标路径")
+# 返回值：目标路径
+
+cf = shutil.copyfile("D:/learn/python/tuling/a.txt", "D:/learn/python/tuling/b.txt")
+print(cf)
+
+# move() 移动文件/文件夹
+# 格式：shutil.move("来源路径", "目标路径")
+# 返回值：目标路径
+
+# make_archive() 归档操作
+# 格式：shutil.make_archive(”归档之后的目录和文件名“， ”后缀“, "需要归档的文件夹“)
+# 返回值： 归档后的地址
+import shutil
+# 是想得到一个后缀名为me的文件
+rst = shutil.make_archive("D:/learn/python/tuling/rui_archive", "zip", "D:/learn/python/tuling/rui")
+print(rst)
+
+# unpack_archive()解包操作
+# 格式：shutil.unpack_archive(”归档文件地址“, "解包后的地址“)
+# 返回值：解包之后的地址
+
+# zipfile
+# zipfile.ZipFile(file[, mode[, compression[, allowZip64]]])
+# 创建一个ZipFile对象，表示一个zip文件，参数file表示文件的路径或类文件对象
+zf = zipfile.ZipFile("D:/learn/python/TU/a.zip")
+# ZipFile.getinfo(name):
+# 获取zip文件类指定的文件信息，返回一个zipfile.ZipInfo对象，它包括文件的详细信息
+
+# rst = zf.getinfo("D:/learn/python/TU/a.zip")
+
+# ZipFile.name.list()
+# 获取zip文件类锁头文件的名称列表
+nl = zf.namelist("D:/learn/python/TU/")
+print(nl)
+
+zf = zipfile.ZipFile("D:/learn/python/TU/a.zip")
+# ZipFile.extractall([path[, members[, pwd]]])
+# 解压zip包中所有文件到当前目录
+rst = zf.extractall("D:\learn\python\TU")
+
+# random() 获取0-1之间的随机小数
+# 格式：randmo.random()
+# 返回值：随机0-1之间的小数
+
+print(random.random())
+
+# 利用random函数，生成0-100直接整数
+
+# choice() 随机返回序列中的某个值
+# 格式：random.choice(序列)
+# 返回值：序列中的某个值
+l = [str(i) +"haha" for i in range(10)]
+print(l)
+rst = (random.choice(l))
+print(rst)
+
+# shuffle()随机打乱列表
+# 格式：random.shuffle(列表)
+# 返回值：打乱顺序之后的列表
+
+l1 = [i for i in range(10)]
+print(l1)
+
+random.shuffle(l1)
+print(l1)
+'''
+# randint(a, b): 返回一个a到b之间的随机整数，包含a和b
+print(random.randint(0,100))
