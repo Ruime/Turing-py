@@ -57,6 +57,7 @@ for i in l3:
 l4 = [i for i in l3]
 print(l4)
 '''
+
 # 定义一个操作函数
 # 加入操作函数只是相加
 def myAdd(x,y):
