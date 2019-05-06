@@ -55,7 +55,7 @@ def myF2():
 f3 = myF2()
 print(type(f3))
 print(f3)
-'''
+
 
 
 # 1.myf4 定义函数，返回内部定义函数myf5
@@ -75,3 +75,83 @@ def myF4(*args):
 f5 = myF4(1, 2, 3, 4, 5, 6)
 # f5的调用方式
 f5()
+
+# 装饰器(Decrator)
+import time
+
+# 打印hello word前打印系统时间，实现这个功能不能改变现有代码
+# 使用装饰器
+# 高阶函数，以函数作为参数
+import time
+def printTime(f):
+    def wrapper(*args, **kwargs):
+        print("Time:", time.ctime())
+        return f(*args, **kwargs)
+    return wrapper
+
+# 上面定义了一个装饰器，使用时需要用到@，此符号是python的语法糖
+# @printTime
+# def Hello():
+#     print("Hello word")
+
+# Hello()
+
+
+# 装饰器的好处是，一旦定义，则可以装饰任意函数
+# 一旦被其装饰，则把装饰器的功能直接添加到定义函数的功能上
+@printTime
+def hello1():
+    print("今天很高兴，被老板揪着讲课了")
+    print("还可以有很多的选择")
+
+hello1()
+
+# 上面对函数的装饰使用了系统定义的语法糖
+# 下面开始手动执行下装饰器
+# 先定义函数
+import time
+def printTime(f):
+    def wrapper(*args, **kwargs):
+        print("Time:", time.ctime())
+        return f(*args, **kwargs)
+    return wrapper
+
+def hello3():
+    print("我是手动执行的")
+
+hello3 = printTime(hello3)
+hello3()
+'''
+
+print(int("12345", base=8))
+
+# 新建一个函数，此函数是默认输入的字符串是16进制的数字
+# 把此字符串返回十进制的数字
+def int16(x, base=16):
+    return int(x,base)
+# print(int16("12345"))
+
+import functools
+int16 = functools.partial(int,base=16)
+print(int16("123456"))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
