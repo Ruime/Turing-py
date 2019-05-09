@@ -121,7 +121,6 @@ def hello3():
 
 hello3 = printTime(hello3)
 hello3()
-'''
 
 print(int("12345", base=8))
 
@@ -135,7 +134,74 @@ import functools
 int16 = functools.partial(int,base=16)
 print(int16("123456"))
 
+# zip案例
+l1 = [1,2,3,4,5]
+l2 = [11,22,33,44,55]
+z = zip(l1,l2)
+print(type(z))
+print(z)
+for i in z:
+    print(i)
 
+l1 = ["xiaowang", "xiaoli", "xiaohei"]
+l2 = [89,23,99]
+z = zip(l1,l2)
+for i in z:
+    print(i)
+
+l3 = [i for i in z]
+print(l3)
+
+# enumerate
+l1 = [11,22,33,44,55]
+
+em = enumerate(l1)
+l2 = [ i for i in em]
+print(l2)
+eu = enumerate(l1, start=100)
+l2 = [ i for i in eu]
+print(l2)
+
+import collections
+point = collections.namedtuple("point", ['x', 'y'])
+p = point(11,22)
+print(p.x)
+print(p[0])
+
+
+Circle = collections.namedtuple("Circle", ['x','y','r'])
+c = Circle(100, 120, 20)
+print(c)
+print(type(c))
+# 检测以下nametuple属于谁的子类
+print(isinstance(c,tuple))
+
+
+# dequeue
+
+from collections import deque
+
+q = deque(['a', 'b', 'c'])
+print(q)
+
+q.append('d')
+print(q)
+
+q.appendleft('x')
+print(q)
+'''
+# defaultdict
+d1 = {"one":1, 'two':2,"three":3}
+print(d1['one'])
+
+
+from collections import defaultdict
+func = lambda : 'rui'
+d2 = defaultdict(func)
+d2['one'] = 1
+d2['two'] = 2
+print(d2['one'])
+print(d2['four'])
 
 
 

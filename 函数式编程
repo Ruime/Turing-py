@@ -17,3 +17,26 @@
 - 参数固定的函数，相当于一个由特定参数的函数体
 - functools.partal的作用是，把一个函数的某些函数固定返回一个新函数
 
+
+
+
+# 高级函数补充
+### zip
+- 把两个可迭代内容生成一个可迭代的内容
+
+# enumerate
+- 跟zip较像
+- 对可迭代对象里的每一个元素，配上一个索引，然后索引内容构成tuple类型
+
+# collections模块
+- namedtuple
+- deque
+# namedtuple
+- tuple类型
+- 是一个可命名的tuple
+
+# dequeue
+- 比较方便的解决了频繁删除插入带来的效率问题
+
+# defaultdict
+- 当直接读取dict不存在属性时，直接返回默认值
