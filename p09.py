@@ -1,3 +1,5 @@
+import pickle
+import shelve
 # 打开文件，用写的方式
 # f 称之为文件句柄
 # r 表示文件后面的字符串内容不需要转义
@@ -61,7 +63,7 @@ with open(r"test01.txt", "r", encoding='utf-8') as f:
     f.seek(0, 0)
     strChar = f.read()
     print(strChar)
-'''
+
 # 关于读取文件的练习
 # 打开文件，三个字符一组读出内容，打印
 # 每读一次，休息一秒
@@ -74,3 +76,135 @@ with open(r"test01.txt", "r", encoding='utf-8') as f:
         print(strChar)
         time.sleep(1)
         strChar = f.read(3)
+
+# tell 函数：用来显示文件读写指针当前的位置
+with open(r"test01.txt", "r", encoding='utf-8') as f:
+    strChar = f.read(3)
+    pos = f.tell()
+
+    while strChar:
+        print(pos)
+        print(strChar)
+        strChar = f.read(3)
+        pos = f.tell()
+# 以下结果说明：
+# tell的返回数字的单位是byte
+# read是以字符为单位
+
+# write 案例
+# 1.向文件追加一句诗
+with open(r"test01.txt", "a") as f:
+    f.write("\n我曾想要我的歌声\n\n无尽沉沦的感动")
+
+# 可以直接写入行,用writeline
+# a代表追加方式打开
+with open(r"test01.txt", "a") as f:
+    f.writelines("\n我曾想要我的歌声")
+    f.writelines("\n\n无尽沉沦的感动")
+
+l = ["I", "love", "python"]
+with open(r"test01.txt", "w") as f:
+    f.writelines(l)
+# 序列化案例
+age = 18
+with open(r"test01.txt", "wb") as f:
+    pickle.dump(age, f)
+
+# 反序列化案例
+with open(r"test01.txt", "rb") as f:
+    age = pickle.load(f)
+    print(age)
+
+# 使用shelve创建文件并使用
+# 打开文件
+# shv相当与一个字典
+shv = shelve.open(r"shv.db")
+
+shv['one'] = 1
+shv['two'] = 2
+shv['three'] = 3
+shv.close()
+
+# 通过以上案例发现，shelve自动创建的不仅仅是一个shv,db文件，还包括其它格式的文件
+# shelve读取案例
+shv = shelve.open(r'shv.db')
+
+try:
+    print(shv['one'])
+    print(shv['three'])
+finally:
+    shv.close()
+
+
+# shelve 之只读打开
+shv = shelve.open(r'shv.db', flag='r')
+
+try:
+    k1 = shv['one']
+    print(k1)
+finally:
+    shv.close()
+
+
+
+shv = shelve.open(r'shv.db')
+try:
+    shv['one'] = {"eins":1, "zwei":2, "drei":3}
+finally:
+    shv.close()
+
+
+shv = shelve.open(r'shv.db')
+try:
+    one = shv['one']
+    print(one)
+finally:
+    shv.close()
+
+# shelve忘记写回，需要使用强制写回
+shv = shelve.open(r'shv.db', writeback=True)
+try:
+    k1 = shv['one']
+    print(k1)
+    # 此时，一旦shelve关闭，则内容还是在内存中，没有写回数据库
+    k1["eins"] = 100
+finally:
+    shv.close()
+
+shv = shelve.open(r'shv.db')
+try:
+    k1 = shv['one']
+    print(k1)
+    k1["eins"] = 100
+finally:
+    shv.close()
+'''
+# shelve 使用with管理上下文环境
+with shelve.open(r'shv.db', writeback=True) as shv:
+    k1 = shv['one']
+    print(k1)
+    # 此时，一旦shelve关闭，则内容还是存在于内存中，没有写回数据库
+    k1["eins"] =1000
+
+with shelve.open(r'shv.db') as shv:
+    print(shv['one'])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
