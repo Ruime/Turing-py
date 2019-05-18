@@ -79,4 +79,61 @@
           processName 	%(processName)s 	进程名称，Python 3.1新增
           thread 	%(thread)d 	线程ID
           threadName 	%(thread)s 	线程名称 
-       
+
+# 2.1.logging模块的处理流程
+- 四大组件
+    - 日志器(Logger):产生日志的一个接口
+    - 处理器(Mandler):把产生的日志发送到相应的目的地
+    - 过滤器(Filter):更精细的控制哪些日志输出
+    - 格式器(Formatter):对输出的信息进行格式化
+- Logger
+
+    - 产生一个日志
+    - 操作
+                
+             Logger.setLevel() 	设置日志器将会处理的日志消息的最低严重级别
+             Logger.addHandler() 和 Logger.removeHandler() 	为该logger对象添加 和 移除一个handler对象
+             Logger.addFilter() 和 Logger.removeFilter() 	为该logger对象添加 和 移除一个filter对象
+             Logger.debug: 产生一条debug级别的日志，同理，info，error，等
+             Logger.exception(): 创建类似于Logger.error的日志消息
+             Logger.log():获取一个明确的日志level参数类创建一个日志记录
+    - 如何得到一个logger对象
+        - 实例化
+        - logging.getLogger()
+- Handler
+    - 把log发送到制定位置
+    - 方法
+        - setLevel
+        - setFormat
+        - addFilter, removeFilter
+- 不需要直接使用，Handler是基类
+        
+        logging.StreamHandler 	将日志消息发送到输出到Stream，如std.out, std.err或任何file-like对象。
+        logging.FileHandler 	将日志消息发送到磁盘文件，默认情况下文件大小会无限增长
+        logging.handlers.RotatingFileHandler 	将日志消息发送到磁盘文件，并支持日志文件按大小切割
+        logging.hanlders.TimedRotatingFileHandler 	将日志消息发送到磁盘文件，并支持日志文件按时间切割
+        logging.handlers.HTTPHandler 	将日志消息以GET或POST的方式发送给一个HTTP服务器
+        logging.handlers.SMTPHandler 	将日志消息发送给一个指定的email地址
+        logging.NullHandler 	该Handler实例会忽略error messages，通常被想使用logging的library开发者使用来避免'No handlers could be found for logger XXX'信息的出现。
+
+- Format类
+    - 可以直接实例化
+    - 可以继承Format添加特殊内容
+    - 三个参数
+        - fmt:指定消息格式化字符串，如果不指定该参数则默认使用message的原始值
+        - datefmt：指定日期格式字符串，如果不指定该参数则默认使用"%Y-%m-%d %H:%M:%S"
+        - style：Python 3.2新增的参数，可取值为 '%', '{'和 '$'，如果不指定该参数则默认使用'%'
+    - Filter类
+        - 可以被Handler和Logger使用
+        - 控制传递过来的信息的具体内容
+        - 案例02
+            
+    
+    
+    
+    
+    
+    
+    
+    
+    
